@@ -1,7 +1,7 @@
 // Paste your Formspree form ID here (the part after https://formspree.io/f/)
-const FORMSPREE_ID = 'YOUR_FORM_ID';
+const FORMSPREE_ID = 'moeeaoyb';
 
-const ENDPOINT = `https://formspree.io/f/${moeeaoyb}`;
+const ENDPOINT = `https://formspree.io/f/${FORMSPREE_ID}`;
 const STORAGE_KEY = 'sunday-dinner-pick';
 const NAMES = {"pad-see-ew":"Pad See Ew","garlic-chicken-bowl":"Garlic Chicken Bowl","takeout":"Takeout","chefs-choice":"Chef's choice"};
 const KNOWN_SPOTS = ["Jeepney's", 'Beartooth', 'El Jefe'];
@@ -86,7 +86,7 @@ form.addEventListener('submit', async e => {
     saved = pick; dirty = false; showSaved(pick);
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(pick)); } catch (e) {}
     saving = false;
-    setStatus(`Locked in: ${label(pick)}. Noted, chef. Let me handle the rest.`, 'ok');
+    setStatus(`Locked in: ${label(pick)}. Noted, chef! Let me handle the rest.`, 'ok');
   } catch (err) {
     saving = false;
     setStatus("Couldn't save your pick. Check your connection and try again, or just text me.", true);
