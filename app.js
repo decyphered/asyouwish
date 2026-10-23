@@ -1,7 +1,7 @@
 // Paste your Formspree form ID here (the part after https://formspree.io/f/)
 const FORMSPREE_ID = 'YOUR_FORM_ID';
 
-const ENDPOINT = `https://formspree.io/f/${FORMSPREE_ID}`;
+const ENDPOINT = `https://formspree.io/f/${moeeaoyb}`;
 const STORAGE_KEY = 'sunday-dinner-pick';
 const NAMES = {"pad-see-ew":"Pad See Ew","garlic-chicken-bowl":"Garlic Chicken Bowl","takeout":"Takeout","chefs-choice":"Chef's choice"};
 const KNOWN_SPOTS = ["Jeepney's", 'Beartooth', 'El Jefe'];
