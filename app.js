@@ -20,10 +20,10 @@ const val = n => (form.querySelector(`input[name="${n}"]:checked`) || {}).value 
 function spotVal(){ const s = val('spot'); return s === 'other' ? (otherEl.value.trim() || null) : s; }
 function label(p){ return p.dinner === 'takeout' ? `Takeout from ${p.spot}` : (NAMES[p.dinner] || p.dinner); }
 function summary(p){ return label(p) + (p.time ? ` at ${p.time}` : ''); }
-// Every 15 minutes from 12:00 AM to 11:45 PM. The "Pick a time" placeholder sits at noon,
+// Every 30 minutes from 12:00 AM to 11:30 PM. The "Pick a time" placeholder sits at noon,
 // so the iPhone wheel opens in the middle of the day instead of at midnight.
 const placeholder = timeEl.options[0];
-for (let m = 0; m < 1440; m += 15) {
+for (let m = 0; m < 1440; m += 30) {
   const h = Math.floor(m / 60), t = `${h % 12 || 12}:${String(m % 60).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`;
   if (m === 720) timeEl.add(placeholder);
   timeEl.add(new Option(t, t));
