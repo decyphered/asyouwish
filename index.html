@@ -44,7 +44,7 @@ body{background:radial-gradient(circle at min(calc(100% - 50px), calc(50% + 13re
 
 header{display:flex;flex-direction:column;gap:6px;position:relative;padding-top:8px}
 .night{position:absolute;top:-8px;right:0;width:112px;height:84px;pointer-events:none;overflow:visible}
-.night .moon{fill:var(--moon);filter:drop-shadow(0 0 18px rgba(246,231,184,.35))}
+.night .moon{fill:var(--moon)}
 .night .bat{fill:var(--fg);opacity:.85}
 @media (prefers-reduced-motion: no-preference){
   .night .bat{animation:flap 3.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
@@ -153,6 +153,8 @@ button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
 <div class="wrap">
   <header>
     <svg class="night" viewBox="0 0 112 84" aria-hidden="true">
+      <defs><radialGradient id="moonGlow"><stop offset=".5" stop-color="#F6E7B8" stop-opacity=".28"/><stop offset="1" stop-color="#F6E7B8" stop-opacity="0"/></radialGradient></defs>
+      <circle cx="80" cy="34" r="52" fill="url(#moonGlow)"></circle>
       <circle class="moon" cx="80" cy="34" r="26"></circle>
       <path class="bat" d="M14 30c4-6 9-7 12-4 1-3 3-4 4-4s3 1 4 4c3-3 8-2 12 4-4-1-7 0-8 3-2-2-5-2-6 1-1-2-2-3-2-3s-1 1-2 3c-1-3-4-3-6-1-1-3-4-4-8-3z"></path>
       <path class="bat bat2" d="M44 60c3-4 6-5 8-3 1-2 2-3 3-3s2 1 3 3c2-2 5-1 8 3-3-1-5 0-6 2-1-1-3-1-4 1l-1-2-1 2c-1-2-3-2-4-1-1-2-3-3-6-2z"></path>
@@ -181,7 +183,7 @@ button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
     <div class="choices" role="radiogroup" aria-labelledby="dn">
       <div class="choice">
         <input type="radio" name="dinner" id="d-psew" value="pad-see-ew">
-        <label for="d-psew"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Pad See Ew</span><span class="sub">(the one you sent me on IG!)</span></span></label>
+        <label for="d-psew"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Pad See Ew</span><span class="sub"><a class="recipe" href="https://www.instagram.com/reel/DeNG7pUJ8ql/?psln=ajE5bG1vcXVheTd3" target="_blank" rel="noopener">The one you sent me on IG! &#8599;</a></span></span></label>
       </div>
       <div class="choice">
         <input type="radio" name="dinner" id="d-garlic" value="garlic-chicken-bowl">
