@@ -25,6 +25,7 @@
 :root{
   --bg:#15101F; --surface:#211A2E; --fg:#F3EEE6; --muted:#B8ADC8; --line:#3D3250;
   --accent:#FF7A1A; --accent-ink:#1A0F05; --accent-soft:#3A2418; --chili:#B6F25A; --moon:#F6E7B8;
+  --danger:#FF8A7A; --line-hover:#5A4A72;
   --spooky:"Creepster", "Chalkduster", fantasy, cursive;
   --display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --body:"DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -36,14 +37,14 @@
 html{-webkit-text-size-adjust:100%;padding-top:env(safe-area-inset-top,0px)}
 body{margin:0}
 img{max-width:100%}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;
+body{background:radial-gradient(circle at min(calc(100% - 50px), calc(50% + 13rem)) 60px, rgba(246,231,184,.07), transparent 280px) no-repeat var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;
   padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
   padding-block:28px 0}
-.wrap{max-width:30rem;margin:0 auto;display:flex;flex-direction:column;gap:28px;padding-bottom:120px}
+.wrap{max-width:30rem;margin:0 auto;display:flex;flex-direction:column;gap:28px;padding-bottom:150px}
 
 header{display:flex;flex-direction:column;gap:6px;position:relative;padding-top:8px}
-.night{position:absolute;top:-8px;right:0;width:112px;height:84px;pointer-events:none}
-.night .moon{fill:var(--moon)}
+.night{position:absolute;top:-8px;right:0;width:112px;height:84px;pointer-events:none;overflow:visible}
+.night .moon{fill:var(--moon);filter:drop-shadow(0 0 18px rgba(246,231,184,.35))}
 .night .bat{fill:var(--fg);opacity:.85}
 @media (prefers-reduced-motion: no-preference){
   .night .bat{animation:flap 3.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
@@ -53,11 +54,12 @@ header{display:flex;flex-direction:column;gap:6px;position:relative;padding-top:
 .eyebrow{padding-right:120px;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--chili)}
 h1{margin:0;display:flex;flex-direction:column;gap:8px}
 h1 .hi{font-family:var(--spooky);font-weight:400;font-size:3.8rem;line-height:1;letter-spacing:.03em;color:var(--accent)}
-h1 .hi-sub{font-family:var(--display);font-weight:800;font-size:1.45rem;line-height:1.2;letter-spacing:-.01em;text-wrap:balance;max-width:22ch}
+h1 .hi-sub{font-family:var(--display);font-weight:700;font-size:1.3rem;line-height:1.2;letter-spacing:-.01em;text-wrap:balance;max-width:22ch}
 .or{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
 .or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
-.drive label{border-style:dashed;border-color:var(--chili)}
-.drive .car{flex:none;color:var(--chili)}
+.chef label{border-style:dashed}
+.chef .chef-hat{flex:none;color:var(--muted);transition:color .15s}
+.chef input:checked + label .chef-hat{color:var(--accent)}
 .lede{margin:6px 0 0;color:var(--muted);max-width:34ch}
 
 h2{font-family:var(--display);font-weight:700;font-size:1.05rem;margin:0;letter-spacing:.01em}
@@ -74,7 +76,9 @@ h2{font-family:var(--display);font-weight:700;font-size:1.05rem;margin:0;letter-
 .choice{position:relative}
 .choice input{position:absolute;opacity:0;inset:0;margin:0;pointer-events:none}
 .choice label{display:flex;align-items:center;gap:14px;min-height:64px;padding:14px 16px;background:var(--surface);
-  border:1.5px solid var(--line);border-radius:14px;cursor:pointer;transition:border-color .15s, background .15s}
+  border:1.5px solid var(--line);border-radius:14px;cursor:pointer;transition:border-color .15s, background .15s, transform .1s}
+@media (hover:hover){.choice input:not(:checked) + label:hover{border-color:var(--line-hover)}}
+.choice label:active{transform:scale(.99)}
 .choice .dot{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;transition:border-color .15s}
 .choice .dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent);transform:scale(0);transition:transform .15s}
 .choice .name{font-family:var(--display);font-weight:700;font-size:1.2rem;line-height:1.2}
@@ -84,13 +88,16 @@ h2{font-family:var(--display);font-weight:700;font-size:1.05rem;margin:0;letter-
 .choice input:focus-visible + label{outline:3px solid var(--accent);outline-offset:2px}
 .choice .txt{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
 .choice .sub{font-size:.85rem;color:var(--muted)}
-.choice .more{flex:none;display:inline-flex;align-items:center;gap:4px;font-size:.8rem;font-weight:600;color:var(--accent);
-  padding:4px 10px;border:1.5px solid var(--accent);border-radius:999px}
+.choice .recipe{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.choice .recipe:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+.choice .more{flex:none;display:inline-flex;align-items:center;gap:4px;font-size:.8rem;font-weight:600;color:var(--muted);
+  padding:4px 10px;border:1.5px solid var(--line);border-radius:999px;transition:color .15s, border-color .15s}
+#d-takeout:checked + label .more{color:var(--accent);border-color:var(--accent)}
 .choice .more svg{transition:transform .2s}
 #d-takeout:checked + label{border-bottom-left-radius:0;border-bottom-right-radius:0}
 #d-takeout:checked + label .more svg{transform:rotate(180deg)}
 #d-takeout:checked + label .more-word::after{content:"Pick a spot"}
-#d-takeout:not(:checked) + label .more-word::after{content:"4 options"}
+#d-takeout:not(:checked) + label .more-word::after{content:"8 options"}
 
 .spots{display:flex;flex-wrap:wrap;gap:8px;margin-top:-12px!important;padding:14px 14px 16px!important;
   background:var(--accent-soft);border:1.5px solid var(--accent)!important;border-top:0!important;border-radius:0 0 14px 14px}
@@ -99,16 +106,19 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 .spot{position:relative}
 .spot input{position:absolute;opacity:0;inset:0;margin:0;pointer-events:none}
 .spot label{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);
-  background:var(--surface);font-weight:600;cursor:pointer}
+  background:transparent;font-weight:600;cursor:pointer}
 .spot input:checked + label{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .spot input:focus-visible + label{outline:3px solid var(--accent);outline-offset:2px}
 
-.note label{font-size:.85rem;color:var(--muted);display:block;margin-bottom:6px}
+.dessert{margin-top:16px;display:flex;flex-direction:column;gap:12px}
+.note{margin-top:16px;display:flex;flex-direction:column;gap:12px}
+.note label{font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:.01em}
 .other{flex-basis:100%}
 .other label{font-size:.85rem;color:var(--muted);display:block;margin-bottom:6px}
 .other input{min-height:48px}
 textarea, .other input{width:100%;min-height:72px;resize:vertical;font:inherit;color:var(--fg);background:var(--surface);
   border:1.5px solid var(--line);border-radius:12px;padding:12px 14px}
+::placeholder{color:var(--muted);opacity:.6}
 textarea:focus-visible, .other input:focus-visible{outline:3px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
 
 .saved{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:14px;background:var(--accent-soft)}
@@ -116,16 +126,18 @@ textarea:focus-visible, .other input:focus-visible{outline:3px solid var(--accen
 .saved p{margin:0}
 .saved .when{font-size:.85rem;color:var(--muted)}
 
-.bar{position:fixed;left:0;right:0;bottom:0;background:var(--bg);border-top:1px solid var(--line);
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--bg);
   padding-top:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom, 0px));
   padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.bar::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:24px;background:linear-gradient(transparent,var(--bg));pointer-events:none}
 .bar-inner{max-width:30rem;margin:0 auto;display:flex;flex-direction:column;gap:6px}
 button{font:inherit;font-weight:600;font-size:1.05rem;min-height:52px;border-radius:14px;border:0;cursor:pointer;
   background:var(--accent);color:var(--accent-ink)}
 button:disabled{background:var(--surface);color:var(--muted);box-shadow:inset 0 0 0 1.5px var(--line);cursor:not-allowed}
+button.is-saved{background:transparent;color:var(--chili);box-shadow:inset 0 0 0 1.5px var(--chili);cursor:default}
 button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
 .status{font-size:.85rem;color:var(--muted);text-align:center;min-height:1.3em;margin:0}
-.status.err{color:var(--chili)}
+.status.err{color:var(--danger)}
 .status.ok{color:var(--chili);font-weight:600;font-size:.95rem}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
@@ -158,19 +170,19 @@ button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
   </section>
 
   <form id="pickForm" class="section" novalidate>
-    <div class="section-head"><h2 id="dn">Dinner</h2><span class="hint">Pick one</span></div>
+    <h2 id="dn">Dinner</h2>
     <div class="choices" role="radiogroup" aria-labelledby="dn">
       <div class="choice">
         <input type="radio" name="dinner" id="d-psew" value="pad-see-ew">
-        <label for="d-psew"><span class="dot" aria-hidden="true"></span><span class="name">Pad See Ew</span></label>
+        <label for="d-psew"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Pad See Ew</span><span class="sub">(the one you sent me on IG!)</span></span></label>
       </div>
       <div class="choice">
         <input type="radio" name="dinner" id="d-garlic" value="garlic-chicken-bowl">
-        <label for="d-garlic"><span class="dot" aria-hidden="true"></span><span class="name">Garlic Chicken Bowl</span></label>
+        <label for="d-garlic"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Garlic Chicken Bowl</span><span class="sub"><!-- Paste the recipe URL into href --><a class="recipe" href="https://example.com/recipe" target="_blank" rel="noopener">See the recipe &#8599;</a></span></span></label>
       </div>
       <div class="choice">
         <input type="radio" name="dinner" id="d-takeout" value="takeout">
-        <label for="d-takeout" aria-controls="spotBox"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Takeout</span><span class="sub">Jeepney's, Beartooth, El Jefe, or your own</span></span><span class="more" aria-hidden="true"><span class="more-word"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></label>
+        <label for="d-takeout" aria-controls="spotBox"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Takeout</span><span class="sub">Jeepney's, Beartooth, So Thai, and more</span></span><span class="more" aria-hidden="true"><span class="more-word"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></label>
       </div>
     </div>
 
@@ -179,6 +191,10 @@ button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
       <div class="spot"><input type="radio" name="spot" id="s-jeepneys" value="Jeepney's"><label for="s-jeepneys">Jeepney's</label></div>
       <div class="spot"><input type="radio" name="spot" id="s-beartooth" value="Beartooth"><label for="s-beartooth">Beartooth</label></div>
       <div class="spot"><input type="radio" name="spot" id="s-eljefe" value="El Jefe"><label for="s-eljefe">El Jefe</label></div>
+      <div class="spot"><input type="radio" name="spot" id="s-49th" value="49th State Brewing"><label for="s-49th">49th State Brewing</label></div>
+      <div class="spot"><input type="radio" name="spot" id="s-roadhouse" value="Spenard Roadhouse"><label for="s-roadhouse">Spenard Roadhouse</label></div>
+      <div class="spot"><input type="radio" name="spot" id="s-sothai" value="So Thai"><label for="s-sothai">So Thai</label></div>
+      <div class="spot"><input type="radio" name="spot" id="s-bombay" value="Bombay"><label for="s-bombay">Bombay</label></div>
       <div class="spot"><input type="radio" name="spot" id="s-other" value="other"><label for="s-other">Somewhere else</label></div>
       <div class="other" id="otherWrap" hidden>
         <label for="otherSpot">Where?</label>
@@ -188,15 +204,23 @@ button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
 
     <div class="or" aria-hidden="true">or</div>
     <div class="choices">
-      <div class="choice drive">
+      <div class="choice chef">
         <input type="radio" name="dinner" id="d-drive" value="chefs-choice">
-        <label for="d-drive"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Chef's choice</span><span class="sub">You decide. Surprise me.</span></span><svg class="car" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 13.9V20h12v-6.1A4 4 0 0 0 17 6a5 5 0 0 0-10 0 4 4 0 0 0-1 7.9Z"/><path d="M6 16.5h12"/></svg></label>
+        <label for="d-drive"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Chef's choice</span><span class="sub">You decide. Surprise me.</span></span><svg class="chef-hat" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 13.9V20h12v-6.1A4 4 0 0 0 17 6a5 5 0 0 0-10 0 4 4 0 0 0-1 7.9Z"/><path d="M6 16.5h12"/></svg></label>
+      </div>
+    </div>
+
+    <div class="dessert">
+      <h2>Dessert</h2>
+      <div class="event">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C9.5 3 12 8 12 8s2.5-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>
+        <div><strong>It's a surprise</strong><span>Already handled. No peeking.</span></div>
       </div>
     </div>
 
     <div class="note">
-      <label for="note">Anything else? (optional)</label>
-      <textarea id="note" maxlength="300" placeholder="Requests, demands, cravings..."></textarea>
+      <div class="section-head"><label for="note">Anything else?</label><span class="hint">Optional</span></div>
+      <textarea id="note" maxlength="300" placeholder="Requests, demands, etc."></textarea>
     </div>
   </form>
 </div>

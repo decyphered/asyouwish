@@ -4,7 +4,7 @@ const FORMSPREE_ID = 'moeeaoyb';
 const ENDPOINT = `https://formspree.io/f/${FORMSPREE_ID}`;
 const STORAGE_KEY = 'sunday-dinner-pick';
 const NAMES = {"pad-see-ew":"Pad See Ew","garlic-chicken-bowl":"Garlic Chicken Bowl","takeout":"Takeout","chefs-choice":"Chef's choice"};
-const KNOWN_SPOTS = ["Jeepney's", 'Beartooth', 'El Jefe'];
+const KNOWN_SPOTS = ["Jeepney's", 'Beartooth', 'El Jefe', '49th State Brewing', 'Spenard Roadhouse', 'So Thai', 'Bombay'];
 
 const form = document.getElementById('pickForm');
 const spotBox = document.getElementById('spotBox');
@@ -26,10 +26,11 @@ function refresh(){
   otherWrap.hidden = val('spot') !== 'other';
   const ready = d && (d !== 'takeout' || spotVal());
   saveBtn.disabled = !ready || saving || (saved && !dirty);
-  saveBtn.textContent = saved ? (dirty ? 'Update my pick' : 'Saved') : 'Save my pick';
+  saveBtn.classList.toggle('is-saved', !!saved && !dirty && !saving);
+  saveBtn.textContent = saved ? (dirty ? 'Update my pick' : '✓ Saved') : 'Save my pick';
   if (saving || statusEl.classList.contains('err') || statusEl.classList.contains('ok')) return;
   if (!ready && d === 'takeout') setStatus(val('spot') === 'other' ? 'Type where you want takeout from.' : 'Pick a takeout spot.');
-  else if (!ready) setStatus('Pick a dinner to save.');
+  else if (!ready) setStatus('');
   else if (dirty) setStatus('Not saved yet.');
 }
 
@@ -86,7 +87,7 @@ form.addEventListener('submit', async e => {
     saved = pick; dirty = false; showSaved(pick);
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(pick)); } catch (e) {}
     saving = false;
-    setStatus(`Locked in: ${label(pick)}. Noted, chef! Let me handle the rest.`, 'ok');
+    setStatus('Noted, chef! 🎃', 'ok');
   } catch (err) {
     saving = false;
     setStatus("Couldn't save your pick. Check your connection and try again, or just text me.", true);
