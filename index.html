@@ -40,7 +40,7 @@ img{max-width:100%}
 body{background:radial-gradient(circle at min(calc(100% - 50px), calc(50% + 13rem)) 60px, rgba(246,231,184,.07), transparent 280px) no-repeat var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;
   padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
   padding-block:28px 0}
-.wrap{max-width:30rem;margin:0 auto;display:flex;flex-direction:column;gap:28px;padding-bottom:150px}
+.wrap{max-width:30rem;margin:0 auto;display:flex;flex-direction:column;gap:40px;padding-bottom:150px}
 
 header{display:flex;flex-direction:column;gap:6px;position:relative;padding-top:8px}
 .night{position:absolute;top:-8px;right:0;width:112px;height:84px;pointer-events:none;overflow:visible}
@@ -51,10 +51,12 @@ header{display:flex;flex-direction:column;gap:6px;position:relative;padding-top:
   .night .bat2{animation-delay:-1.4s}
   @keyframes flap{0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(-4px) scaleY(.7)}}
 }
-.eyebrow{padding-right:120px;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--chili)}
-h1{margin:0;display:flex;flex-direction:column;gap:8px}
-h1 .hi{font-family:var(--spooky);font-weight:400;font-size:3.8rem;line-height:1;letter-spacing:.03em;color:var(--accent)}
-h1 .hi-sub{font-family:var(--display);font-weight:700;font-size:1.3rem;line-height:1.2;letter-spacing:-.01em;text-wrap:balance;max-width:22ch}
+h1{margin:0;font-family:var(--spooky);font-weight:400;font-size:3.8rem;line-height:1;letter-spacing:.03em;color:var(--accent)}
+.date-line{margin:2px 0 8px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.date-line time{font-family:var(--display);font-size:1.15rem;font-weight:700;color:var(--fg);white-space:nowrap}
+.date-line .tag{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--chili);
+  border:1.5px solid currentColor;border-radius:999px;padding:2px 9px;white-space:nowrap}
+.hi-sub{margin:0;font-family:var(--display);font-weight:700;font-size:1.3rem;line-height:1.2;letter-spacing:-.01em;text-wrap:balance;max-width:22ch}
 .or{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
 .or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
 .chef label{border-style:dashed}
@@ -62,9 +64,14 @@ h1 .hi-sub{font-family:var(--display);font-weight:700;font-size:1.3rem;line-heig
 .chef input:checked + label .chef-hat{color:var(--accent)}
 .lede{margin:6px 0 0;color:var(--muted);max-width:34ch}
 
-h2{font-family:var(--display);font-weight:700;font-size:1.05rem;margin:0;letter-spacing:.01em}
+/* Section headings read like a printed menu: small caps label with a rule running to the right. */
+h2, .note label{display:flex;align-items:center;gap:12px;margin:0;font-family:var(--body);font-weight:600;font-size:.8rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--fg)}
+h2::after{content:"";flex:1;height:1px;background:var(--line)}
 .section{display:flex;flex-direction:column;gap:12px}
-.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.section-head{display:flex;align-items:center;gap:12px}
+.section-head::after{content:"";flex:1;height:1px;background:var(--line);order:1}
+.section-head .hint{order:2}
 .hint{font-size:.85rem;color:var(--muted)}
 
 .event{display:flex;align-items:center;gap:14px;padding:16px 18px;border:1.5px dashed var(--chili);border-radius:14px;background:var(--surface)}
@@ -110,9 +117,8 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 .spot input:checked + label{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .spot input:focus-visible + label{outline:3px solid var(--accent);outline-offset:2px}
 
-.dessert{margin-top:16px;display:flex;flex-direction:column;gap:12px}
-.note{margin-top:16px;display:flex;flex-direction:column;gap:12px}
-.note label{font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:.01em}
+.dessert{margin-top:28px;display:flex;flex-direction:column;gap:12px}
+.note{margin-top:28px;display:flex;flex-direction:column;gap:12px}
 .other{flex-basis:100%}
 .other label{font-size:.85rem;color:var(--muted);display:block;margin-bottom:6px}
 .other input{min-height:48px}
@@ -151,8 +157,9 @@ button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
       <path class="bat" d="M14 30c4-6 9-7 12-4 1-3 3-4 4-4s3 1 4 4c3-3 8-2 12 4-4-1-7 0-8 3-2-2-5-2-6 1-1-2-2-3-2-3s-1 1-2 3c-1-3-4-3-6-1-1-3-4-4-8-3z"></path>
       <path class="bat bat2" d="M44 60c3-4 6-5 8-3 1-2 2-3 3-3s2 1 3 3c2-2 5-1 8 3-3-1-5 0-6 2-1-1-3-1-4 1l-1-2-1 2c-1-2-3-2-4-1-1-2-3-3-6-2z"></path>
     </svg>
-    <span class="eyebrow">Sunday night &middot; spooky season</span>
-    <h1><span class="hi">Cat!</span><span class="hi-sub">A night in with Dr. Orna, dinner, discussion, and excellent company</span></h1>
+    <h1>Cat!</h1>
+    <p class="date-line"><time datetime="2026-10-25">Sunday, October 25</time><span class="tag">Spooky season hang</span></p>
+    <p class="hi-sub">A night in with Dr. Orna, dinner, discussion, and excellent company</p>
     <p class="lede">Big decision ahead. Noodle carefully!</p>
   </header>
 
@@ -165,7 +172,7 @@ button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
     <h2 id="ev">Main event</h2>
     <div class="event">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="13" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
-      <div><strong>Couples Therapy</strong><span>Already on the schedule. No tricks.</span></div>
+      <div><strong>Couples Therapy</strong><span>No tricks. Commentary is the treat.</span></div>
     </div>
   </section>
 
@@ -178,7 +185,7 @@ button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
       </div>
       <div class="choice">
         <input type="radio" name="dinner" id="d-garlic" value="garlic-chicken-bowl">
-        <label for="d-garlic"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Garlic Chicken Bowl</span><span class="sub"><!-- Paste the recipe URL into href --><a class="recipe" href="https://example.com/recipe" target="_blank" rel="noopener">See the recipe &#8599;</a></span></span></label>
+        <label for="d-garlic"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Honey Garlic Chicken</span><span class="sub"><a class="recipe" href="https://healthyfitnessmeals.com/honey-garlic-chicken/" target="_blank" rel="noopener">See the recipe &#8599;</a></span></span></label>
       </div>
       <div class="choice">
         <input type="radio" name="dinner" id="d-takeout" value="takeout">

@@ -3,7 +3,7 @@ const FORMSPREE_ID = 'moeeaoyb';
 
 const ENDPOINT = `https://formspree.io/f/${FORMSPREE_ID}`;
 const STORAGE_KEY = 'sunday-dinner-pick';
-const NAMES = {"pad-see-ew":"Pad See Ew","garlic-chicken-bowl":"Garlic Chicken Bowl","takeout":"Takeout","chefs-choice":"Chef's choice"};
+const NAMES = {"pad-see-ew":"Pad See Ew","garlic-chicken-bowl":"Honey Garlic Chicken","takeout":"Takeout","chefs-choice":"Chef's choice"};
 const KNOWN_SPOTS = ["Jeepney's", 'Beartooth', 'El Jefe', '49th State Brewing', 'Spenard Roadhouse', 'So Thai', 'Bombay'];
 
 const form = document.getElementById('pickForm');
