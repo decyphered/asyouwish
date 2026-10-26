@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Cat! New plans coming soon</title>
+<meta name="description" content="New plans coming soon. Dinner may even be served earlier. We'll see.">
+<meta property="og:title" content="Cat! New plans coming soon">
+<meta property="og:description" content="Dinner may even be served earlier. We'll see.">
+<meta property="og:image" content="https://dinnerwithcat.com/preview.png?v=8">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://dinnerwithcat.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#15101F">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,600&display=swap">
+<style>
+/* Placeholder between dinner nights: a steaming cloche, same palette as the picker. Tapping the lid peeks underneath. */
+:root{
+  --bg:#15101F; --surface:#211A2E; --fg:#F3EEE6; --muted:#B8ADC8; --line:#3D3250;
+  --accent:#FF7A1A; --chili:#B6F25A; --moon:#F6E7B8;
+  --display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --body:"DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{height:100%}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.5;display:flex;flex-direction:column;
+  padding:max(24px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(32px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px))}
+/* margin:auto centers vertically on tall screens but still scrolls from the top when content is taller than the screen. */
+.wrap{max-width:30rem;width:100%;margin:auto;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+
+.cloche{all:unset;cursor:pointer;width:min(220px, 60vw);margin:0 0 10px -6px;-webkit-tap-highlight-color:transparent}
+.cloche:focus-visible{outline:3px solid var(--accent);outline-offset:6px;border-radius:12px}
+.cloche svg{display:block;width:100%;height:auto;overflow:visible}
+.plate{stroke:var(--line);stroke-width:7;stroke-linecap:round}
+.dome, .knob{fill:var(--moon)}
+.shine{fill:none;stroke:#fff;stroke-opacity:.45;stroke-width:6;stroke-linecap:round}
+.steam path{fill:none;stroke:var(--muted);stroke-width:4;stroke-linecap:round;opacity:.6}
+.eyes{font-size:30px;opacity:0;transition:opacity .2s}
+.lid{transform-box:view-box;transform-origin:30px 124px;transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+.peek .lid{transform:rotate(-24deg)}
+.peek .eyes{opacity:1}
+.peek .steam{opacity:0}
+.steam{transition:opacity .2s}
+@media (prefers-reduced-motion: no-preference){
+  .steam path{animation:steam 2.6s ease-in-out infinite;transform-box:fill-box}
+  .steam path:nth-child(2){animation-delay:-.9s}
+  .steam path:nth-child(3){animation-delay:-1.7s}
+  @keyframes steam{0%{opacity:0;transform:translateY(10px)}35%{opacity:.7}100%{opacity:0;transform:translateY(-16px)}}
+}
+@media (prefers-reduced-motion: reduce){.lid,.eyes{transition:none}}
+
+h1{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(2.6rem, 12vw, 3.6rem);line-height:1;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--accent)}
+.sub{margin:4px 0 0;font-size:1.1rem;color:var(--muted);max-width:28ch}
+.whisper{margin:0;min-height:1.5em;font-size:.9rem;color:var(--accent);font-weight:600}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <button class="cloche" id="cloche" type="button" aria-label="Lift the lid">
+    <svg viewBox="0 0 200 150" aria-hidden="true">
+      <g class="steam">
+        <path d="M78 40c-9-8 9-14 0-26"/>
+        <path d="M100 34c-9-8 9-14 0-26"/>
+        <path d="M122 40c-9-8 9-14 0-26"/>
+      </g>
+      <text class="eyes" x="100" y="118" text-anchor="middle">👀</text>
+      <g class="lid">
+        <path class="dome" d="M30 124a70 70 0 0 1 140 0z"/>
+        <circle class="knob" cx="100" cy="50" r="8"/>
+        <path class="shine" d="M56 104a48 48 0 0 1 26-32"/>
+      </g>
+      <path class="plate" d="M16 128h168"/>
+    </svg>
+  </button>
+  <h1>New plans<br><em>coming soon</em></h1>
+  <p class="sub">Dinner <em>may</em> even be served earlier. We'll&nbsp;see.</p>
+  <p class="whisper" id="whisper" aria-live="polite"></p>
+</main>
+<script>
+// Tap the lid: it tips up, shows 👀, scolds gently, and settles back down.
+const cloche = document.getElementById('cloche'), whisper = document.getElementById('whisper');
+const lines = [
+  'Hey! No peeking.',
+  'Cinnamon is going to hear about this!',
+  'Peeking adds five minutes. House rules.',
+  'Earlier dinner, not THAT early.',
+  "Don't distract the chef. The chef is on a schedule now.",
+  'Shh. Almost ready. Probably.',
+  'Almost 👀'
+];
+let n = 0, timer;
+cloche.addEventListener('click', () => {
+  cloche.classList.add('peek');
+  whisper.textContent = lines[n++ % lines.length];
+  clearTimeout(timer);
+  timer = setTimeout(() => { cloche.classList.remove('peek'); }, 1100);
+});
+</script>
+</body>
+</html>

@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Cat! Sunday, Oct 25 plans</title>
-<meta name="description" content="Dinner, Dr. Orna, and excellent company. Your pick.">
-<meta property="og:title" content="Cat! Sunday night plans">
-<meta property="og:description" content="Dinner, Dr. Orna, and excellent company. Your pick.">
-<meta property="og:image" content="https://dinnerwithcat.com/preview.png?v=3">
+<title>Cat! New plans coming soon</title>
+<meta name="description" content="New plans coming soon. Dinner may even be served earlier. We'll see.">
+<meta property="og:title" content="Cat! New plans coming soon">
+<meta property="og:description" content="Dinner may even be served earlier. We'll see.">
+<meta property="og:image" content="https://dinnerwithcat.com/preview.png?v=8">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://dinnerwithcat.com/">
@@ -18,244 +18,91 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Creepster&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,600&display=swap">
 <style>
-/* Layout: one narrow column, a ticket-like menu. Header, the set "main event", dinner choices as big tap cards, sticky save bar. */
-/* Single dark look on purpose: a Halloween night. Pumpkin orange for choices, slime green for small accents. */
+/* Placeholder between dinner nights: a steaming cloche, same palette as the picker. Tapping the lid peeks underneath. */
 :root{
   --bg:#15101F; --surface:#211A2E; --fg:#F3EEE6; --muted:#B8ADC8; --line:#3D3250;
-  --accent:#FF7A1A; --accent-ink:#1A0F05; --accent-soft:#3A2418; --chili:#B6F25A; --moon:#F6E7B8;
-  --danger:#FF8A7A; --line-hover:#5A4A72;
-  --spooky:"Creepster", "Chalkduster", fantasy, cursive;
+  --accent:#FF7A1A; --chili:#B6F25A; --moon:#F6E7B8;
   --display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --body:"DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme:dark;
 }
-
 *{box-sizing:border-box}
-[hidden]{display:none!important}
-html{-webkit-text-size-adjust:100%;padding-top:env(safe-area-inset-top,0px)}
-body{margin:0}
-img{max-width:100%}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;
-  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
-  padding-block:28px 0}
-.wrap{max-width:30rem;margin:0 auto;display:flex;flex-direction:column;gap:40px;padding-bottom:150px}
+html{height:100%}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.5;display:flex;flex-direction:column;
+  padding:max(24px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(32px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px))}
+/* margin:auto centers vertically on tall screens but still scrolls from the top when content is taller than the screen. */
+.wrap{max-width:30rem;width:100%;margin:auto;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
 
-header{display:flex;flex-direction:column;gap:6px;position:relative;padding-top:8px}
-.night{position:absolute;top:-8px;right:0;width:112px;height:84px;pointer-events:none;overflow:visible}
-.night .moon{fill:var(--moon)}
-.night .bat{fill:var(--fg);opacity:.85}
+.cloche{all:unset;cursor:pointer;width:min(220px, 60vw);margin:0 0 10px -6px;-webkit-tap-highlight-color:transparent}
+.cloche:focus-visible{outline:3px solid var(--accent);outline-offset:6px;border-radius:12px}
+.cloche svg{display:block;width:100%;height:auto;overflow:visible}
+.plate{stroke:var(--line);stroke-width:7;stroke-linecap:round}
+.dome, .knob{fill:var(--moon)}
+.shine{fill:none;stroke:#fff;stroke-opacity:.45;stroke-width:6;stroke-linecap:round}
+.steam path{fill:none;stroke:var(--muted);stroke-width:4;stroke-linecap:round;opacity:.6}
+.eyes{font-size:30px;opacity:0;transition:opacity .2s}
+.lid{transform-box:view-box;transform-origin:30px 124px;transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+.peek .lid{transform:rotate(-24deg)}
+.peek .eyes{opacity:1}
+.peek .steam{opacity:0}
+.steam{transition:opacity .2s}
 @media (prefers-reduced-motion: no-preference){
-  .night .bat{animation:flap 3.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
-  .night .bat2{animation-delay:-1.4s}
-  @keyframes flap{0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(-4px) scaleY(.7)}}
+  .steam path{animation:steam 2.6s ease-in-out infinite;transform-box:fill-box}
+  .steam path:nth-child(2){animation-delay:-.9s}
+  .steam path:nth-child(3){animation-delay:-1.7s}
+  @keyframes steam{0%{opacity:0;transform:translateY(10px)}35%{opacity:.7}100%{opacity:0;transform:translateY(-16px)}}
 }
-h1{margin:0;font-family:var(--spooky);font-weight:400;font-size:3.8rem;line-height:1;letter-spacing:.03em;color:var(--accent)}
-.date-line{margin:2px 0 8px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
-.date-line time{font-family:var(--display);font-size:1.15rem;font-weight:700;color:var(--fg);white-space:nowrap}
-.date-line .tag{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--chili);
-  border:1.5px solid currentColor;border-radius:999px;padding:2px 9px;white-space:nowrap}
-.hi-sub{margin:0;font-family:var(--display);font-weight:700;font-size:1.3rem;line-height:1.2;letter-spacing:-.01em;text-wrap:balance;max-width:22ch}
-.or{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
-.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
-.chef label{border-style:dashed}
-.chef .chef-hat{flex:none;color:var(--muted);transition:color .15s}
-.chef input:checked + label .chef-hat{color:var(--accent)}
-.lede{margin:6px 0 0;color:var(--muted);max-width:34ch}
+@media (prefers-reduced-motion: reduce){.lid,.eyes{transition:none}}
 
-/* Section headings read like a printed menu: small caps label with a rule running to the right. */
-h2, .note label{display:flex;align-items:center;gap:12px;margin:0;font-family:var(--body);font-weight:600;font-size:.8rem;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--fg)}
-h2::after{content:"";flex:1;height:1px;background:var(--line)}
-.section{display:flex;flex-direction:column;gap:12px}
-.section-head{display:flex;align-items:center;gap:12px}
-.section-head::after{content:"";flex:1;height:1px;background:var(--line);order:1}
-.section-head .hint{order:2}
-.hint{font-size:.85rem;color:var(--muted)}
-
-.event{display:flex;align-items:center;gap:14px;padding:16px 18px;border:1.5px dashed var(--chili);border-radius:14px;background:var(--surface)}
-.event svg{flex:none;color:var(--chili)}
-.event strong{font-family:var(--display);font-size:1.25rem;font-weight:700;display:block;line-height:1.2}
-.event span{font-size:.85rem;color:var(--muted)}
-
-.choices{display:flex;flex-direction:column;gap:10px}
-.choice{position:relative}
-.choice input{position:absolute;opacity:0;inset:0;margin:0;pointer-events:none}
-.choice label{display:flex;align-items:center;gap:14px;min-height:64px;padding:14px 16px;background:var(--surface);
-  border:1.5px solid var(--line);border-radius:14px;cursor:pointer;transition:border-color .15s, background .15s, transform .1s}
-@media (hover:hover){.choice input:not(:checked) + label:hover{border-color:var(--line-hover)}}
-.choice label:active{transform:scale(.99)}
-.choice .dot{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;transition:border-color .15s}
-.choice .dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent);transform:scale(0);transition:transform .15s}
-.choice .name{font-family:var(--display);font-weight:700;font-size:1.2rem;line-height:1.2}
-.choice input:checked + label{border-color:var(--accent);background:var(--accent-soft)}
-.choice input:checked + label .dot{border-color:var(--accent)}
-.choice input:checked + label .dot::after{transform:scale(1)}
-.choice input:focus-visible + label{outline:3px solid var(--accent);outline-offset:2px}
-.choice .txt{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
-.choice .sub{font-size:.85rem;color:var(--muted)}
-.choice .recipe{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
-.choice .recipe:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
-.choice .more{flex:none;display:inline-flex;align-items:center;gap:4px;font-size:.8rem;font-weight:600;color:var(--muted);
-  padding:4px 10px;border:1.5px solid var(--line);border-radius:999px;transition:color .15s, border-color .15s}
-#d-takeout:checked + label .more{color:var(--accent);border-color:var(--accent)}
-.choice .more svg{transition:transform .2s}
-#d-takeout:checked + label{border-bottom-left-radius:0;border-bottom-right-radius:0}
-#d-takeout:checked + label .more svg{transform:rotate(180deg)}
-#d-takeout:checked + label .more-word::after{content:"Pick a spot"}
-#d-takeout:not(:checked) + label .more-word::after{content:"8 options"}
-
-.spots{display:flex;flex-wrap:wrap;gap:8px;margin-top:-12px!important;padding:14px 14px 16px!important;
-  background:var(--accent-soft);border:1.5px solid var(--accent)!important;border-top:0!important;border-radius:0 0 14px 14px}
-.spots legend{float:left;width:100%;font-size:.85rem;color:var(--muted);margin-bottom:8px;padding:0}
-fieldset{border:0;margin:0;padding:0;min-width:0}
-.spot{position:relative}
-.spot input{position:absolute;opacity:0;inset:0;margin:0;pointer-events:none}
-.spot label{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);
-  background:transparent;font-weight:600;cursor:pointer}
-.spot input:checked + label{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.spot input:focus-visible + label{outline:3px solid var(--accent);outline-offset:2px}
-
-.start{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
-.select{position:relative}
-.select::after{content:"";position:absolute;right:20px;top:50%;width:8px;height:8px;border:solid var(--muted);border-width:0 2px 2px 0;
-  transform:translateY(-70%) rotate(45deg);pointer-events:none}
-.select select{width:100%;min-height:56px;-webkit-appearance:none;appearance:none;font:inherit;font-family:var(--display);font-weight:700;font-size:1.2rem;
-  color:var(--fg);background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:0 48px 0 16px;cursor:pointer;
-  transition:border-color .15s, background .15s}
-.select select:has(option[value=""]:checked){color:var(--muted);font-family:var(--body);font-weight:500;font-size:1rem}
-.select select:not(:has(option[value=""]:checked)){border-color:var(--accent);background:var(--accent-soft)}
-.select select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.dessert{margin-top:28px;display:flex;flex-direction:column;gap:12px}
-.note{margin-top:28px;display:flex;flex-direction:column;gap:12px}
-.other{flex-basis:100%}
-.other label{font-size:.85rem;color:var(--muted);display:block;margin-bottom:6px}
-.other input{min-height:48px}
-textarea, .other input{width:100%;min-height:72px;resize:vertical;font:inherit;color:var(--fg);background:var(--surface);
-  border:1.5px solid var(--line);border-radius:12px;padding:12px 14px}
-::placeholder{color:var(--muted);opacity:.6}
-textarea:focus-visible, .other input:focus-visible{outline:3px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
-
-.saved{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:14px;background:var(--accent-soft)}
-.saved svg{flex:none;color:var(--accent);margin-top:2px}
-.saved p{margin:0}
-.saved .when{font-size:.85rem;color:var(--muted)}
-
-.bar{position:fixed;left:0;right:0;bottom:0;background:var(--bg);
-  padding-top:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom, 0px));
-  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
-.bar::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:24px;background:linear-gradient(transparent,var(--bg));pointer-events:none}
-.bar-inner{max-width:30rem;margin:0 auto;display:flex;flex-direction:column;gap:6px}
-button{font:inherit;font-weight:600;font-size:1.05rem;min-height:52px;border-radius:14px;border:0;cursor:pointer;
-  background:var(--accent);color:var(--accent-ink)}
-button:disabled{background:var(--surface);color:var(--muted);box-shadow:inset 0 0 0 1.5px var(--line);cursor:not-allowed}
-button.is-saved{background:transparent;color:var(--chili);box-shadow:inset 0 0 0 1.5px var(--chili);cursor:default}
-button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
-.status{font-size:.85rem;color:var(--muted);text-align:center;min-height:1.3em;margin:0}
-.status.err{color:var(--danger)}
-.status.ok{color:var(--chili);font-weight:600;font-size:.95rem}
-@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+h1{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(2.6rem, 12vw, 3.6rem);line-height:1;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--accent)}
+.sub{margin:4px 0 0;font-size:1.1rem;color:var(--muted);max-width:28ch}
+.whisper{margin:0;min-height:1.5em;font-size:.9rem;color:var(--accent);font-weight:600}
 </style>
 </head>
 <body>
-
-<div class="wrap">
-  <header>
-    <svg class="night" viewBox="0 0 112 84" aria-hidden="true">
-      <defs><radialGradient id="moonGlow"><stop offset=".5" stop-color="#F6E7B8" stop-opacity=".28"/><stop offset="1" stop-color="#F6E7B8" stop-opacity="0"/></radialGradient></defs>
-      <circle cx="80" cy="34" r="52" fill="url(#moonGlow)"></circle>
-      <circle class="moon" cx="80" cy="34" r="26"></circle>
-      <path class="bat" d="M14 30c4-6 9-7 12-4 1-3 3-4 4-4s3 1 4 4c3-3 8-2 12 4-4-1-7 0-8 3-2-2-5-2-6 1-1-2-2-3-2-3s-1 1-2 3c-1-3-4-3-6-1-1-3-4-4-8-3z"></path>
-      <path class="bat bat2" d="M44 60c3-4 6-5 8-3 1-2 2-3 3-3s2 1 3 3c2-2 5-1 8 3-3-1-5 0-6 2-1-1-3-1-4 1l-1-2-1 2c-1-2-3-2-4-1-1-2-3-3-6-2z"></path>
+<main class="wrap">
+  <button class="cloche" id="cloche" type="button" aria-label="Lift the lid">
+    <svg viewBox="0 0 200 150" aria-hidden="true">
+      <g class="steam">
+        <path d="M78 40c-9-8 9-14 0-26"/>
+        <path d="M100 34c-9-8 9-14 0-26"/>
+        <path d="M122 40c-9-8 9-14 0-26"/>
+      </g>
+      <text class="eyes" x="100" y="118" text-anchor="middle">👀</text>
+      <g class="lid">
+        <path class="dome" d="M30 124a70 70 0 0 1 140 0z"/>
+        <circle class="knob" cx="100" cy="50" r="8"/>
+        <path class="shine" d="M56 104a48 48 0 0 1 26-32"/>
+      </g>
+      <path class="plate" d="M16 128h168"/>
     </svg>
-    <h1>Cat!</h1>
-    <p class="date-line"><time datetime="2026-10-25">Sunday, October 25</time><span class="tag">Spooky season hang</span></p>
-    <p class="hi-sub">A night in with Dr. Orna, dinner, discussion, and excellent company</p>
-    <p class="lede">Big decision ahead. Noodle carefully!</p>
-  </header>
-
-  <div id="savedBox" class="saved" hidden>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-    <div><p id="savedText"></p><p class="when" id="savedWhen"></p></div>
-  </div>
-
-  <section class="section" aria-labelledby="ev">
-    <h2 id="ev">Main event</h2>
-    <div class="event">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="13" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
-      <div><strong>Couples Therapy</strong><span>No tricks. Commentary is the treat.</span></div>
-    </div>
-  </section>
-
-  <form id="pickForm" class="section" novalidate>
-    <div class="start">
-      <h2><label for="startTime">Start time</label></h2>
-      <div class="select"><select id="startTime"><option value="">Pick a time</option></select></div>
-    </div>
-
-    <h2 id="dn">Dinner</h2>
-    <div class="choices" role="radiogroup" aria-labelledby="dn">
-      <div class="choice">
-        <input type="radio" name="dinner" id="d-psew" value="pad-see-ew">
-        <label for="d-psew"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Pad See Ew</span><span class="sub"><a class="recipe" href="https://www.instagram.com/reel/DeNG7pUJ8ql/?psln=ajE5bG1vcXVheTd3" target="_blank" rel="noopener">The one you sent me on IG! &#8599;</a></span></span></label>
-      </div>
-      <div class="choice">
-        <input type="radio" name="dinner" id="d-garlic" value="garlic-chicken-bowl">
-        <label for="d-garlic"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Honey Garlic Chicken</span><span class="sub"><a class="recipe" href="https://healthyfitnessmeals.com/honey-garlic-chicken/" target="_blank" rel="noopener">See the recipe &#8599;</a></span></span></label>
-      </div>
-      <div class="choice">
-        <input type="radio" name="dinner" id="d-takeout" value="takeout">
-        <label for="d-takeout" aria-controls="spotBox"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Takeout</span><span class="sub">Jeepney's, Beartooth, So Thai, and more</span></span><span class="more" aria-hidden="true"><span class="more-word"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></label>
-      </div>
-    </div>
-
-    <fieldset id="spotBox" class="spots" hidden>
-      <legend>From where?</legend>
-      <div class="spot"><input type="radio" name="spot" id="s-jeepneys" value="Jeepney's"><label for="s-jeepneys">Jeepney's</label></div>
-      <div class="spot"><input type="radio" name="spot" id="s-beartooth" value="Beartooth"><label for="s-beartooth">Beartooth</label></div>
-      <div class="spot"><input type="radio" name="spot" id="s-eljefe" value="El Jefe"><label for="s-eljefe">El Jefe</label></div>
-      <div class="spot"><input type="radio" name="spot" id="s-49th" value="49th State Brewing"><label for="s-49th">49th State Brewing</label></div>
-      <div class="spot"><input type="radio" name="spot" id="s-roadhouse" value="Spenard Roadhouse"><label for="s-roadhouse">Spenard Roadhouse</label></div>
-      <div class="spot"><input type="radio" name="spot" id="s-sothai" value="So Thai"><label for="s-sothai">So Thai</label></div>
-      <div class="spot"><input type="radio" name="spot" id="s-bombay" value="Bombay"><label for="s-bombay">Bombay</label></div>
-      <div class="spot"><input type="radio" name="spot" id="s-other" value="other"><label for="s-other">Somewhere else</label></div>
-      <div class="other" id="otherWrap" hidden>
-        <label for="otherSpot">Where?</label>
-        <input type="text" id="otherSpot" maxlength="60" autocomplete="off" placeholder="Type a place">
-      </div>
-    </fieldset>
-
-    <div class="or" aria-hidden="true">or</div>
-    <div class="choices">
-      <div class="choice chef">
-        <input type="radio" name="dinner" id="d-drive" value="chefs-choice">
-        <label for="d-drive"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Chef's choice</span><span class="sub">You decide. Surprise me.</span></span><svg class="chef-hat" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 13.9V20h12v-6.1A4 4 0 0 0 17 6a5 5 0 0 0-10 0 4 4 0 0 0-1 7.9Z"/><path d="M6 16.5h12"/></svg></label>
-      </div>
-    </div>
-
-    <div class="dessert">
-      <h2>Dessert</h2>
-      <div class="event">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C9.5 3 12 8 12 8s2.5-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>
-        <div><strong>It's a surprise</strong><span>Already handled. No peeking.</span></div>
-      </div>
-    </div>
-
-    <div class="note">
-      <div class="section-head"><label for="note">Anything else?</label><span class="hint">Optional</span></div>
-      <textarea id="note" maxlength="300" placeholder="Requests, demands, etc."></textarea>
-    </div>
-  </form>
-</div>
-
-<div class="bar">
-  <div class="bar-inner">
-    <button type="submit" form="pickForm" id="saveBtn" disabled>Save my pick</button>
-    <p class="status" id="status" role="status" aria-live="polite"></p>
-  </div>
-</div>
-
-<script src="app.js?v=4"></script>
+  </button>
+  <h1>New plans<br><em>coming soon</em></h1>
+  <p class="sub">Dinner <em>may</em> even be served earlier. We'll&nbsp;see.</p>
+  <p class="whisper" id="whisper" aria-live="polite"></p>
+</main>
+<script>
+// Tap the lid: it tips up, shows 👀, scolds gently, and settles back down.
+const cloche = document.getElementById('cloche'), whisper = document.getElementById('whisper');
+const lines = [
+  'Hey! No peeking.',
+  'Cinnamon is going to hear about this!',
+  'Peeking adds five minutes. House rules.',
+  'Earlier dinner, not THAT early.',
+  "Don't distract the chef. The chef is on a schedule now.",
+  'Shh. Almost ready. Probably.',
+  'Almost 👀'
+];
+let n = 0, timer;
+cloche.addEventListener('click', () => {
+  cloche.classList.add('peek');
+  whisper.textContent = lines[n++ % lines.length];
+  clearTimeout(timer);
+  timer = setTimeout(() => { cloche.classList.remove('peek'); }, 1100);
+});
+</script>
 </body>
 </html>
