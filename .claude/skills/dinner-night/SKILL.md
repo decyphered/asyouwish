@@ -9,6 +9,10 @@ dinnerwithcat.com is a single-page picker for a planned night in with Cat. She o
 
 `template/` holds the last finished night (Sunday, October 25, 2026: Halloween theme, Couples Therapy with Dr. Orna) as a working example. Copy from it rather than writing from scratch: the layout, spacing and save logic were tuned over many rounds of feedback, and the user likes them.
 
+## 0. Archive the last night first
+
+If the night currently being replaced (root `index.html`, or the staged page in `next/`) has a date that has passed and isn't in `archive/` yet, run the **dinner-archive** skill before building anything. The readable source of a locked page gets overwritten by the new build, so this has to come first. The coming-soon placeholder is never archived.
+
 ## 1. Gather the details
 
 Ask for whatever the user hasn't already said, in one message. Offer last night's values as defaults so they can just say "same":
@@ -51,6 +55,7 @@ Copy `template/index.html` and `template/app.js` over the repo root files, then 
 
 **app.js**
 - `STORAGE_KEY`: **change it for every night**, e.g. `'dinner-2026-11-15'`. Her phone remembers the last saved pick under this key, and with the old key last night's pick would show up as already "Locked in".
+- `EVENT`: the "Add to my calendar" event. **Change `date` every night**, and set `utcOffset` to Alaska's offset on that date (`-09:00` in winter, `-08:00` during daylight time, roughly March to early November). The title the user chose is "Dinner and show w/ C!!", the event lasts `hours`, and there's a 1-hour reminder.
 - `NAMES`: radio value → display name for each dinner.
 - `KNOWN_SPOTS`: must list every takeout spot value exactly. Otherwise a saved spot comes back as "Somewhere else".
 - `setStatus('Noted, chef! 🎃', 'ok')`: retheme the emoji and line.
@@ -80,12 +85,21 @@ Read the screenshot and check, at 320, 375 and 414 px:
 
 To check a state that needs a tap (Takeout open, a time picked), copy index.html to scratch, point its script at the real app.js with an absolute `file:///` URL, add `checked` to an input or a small script after app.js (e.g. `timeEl.value="6:30 PM";refresh();`), and render that copy.
 
+## Password gate
+
+The repo is public, so the picker is published encrypted. Cat unlocks it by finishing an inside-joke quote on a gate screen (`lock/gate.html`). The answer is the AES key and is never written to any file, so ask the user for it rather than looking for it. Her phone remembers the unlock.
+
+- Edit the readable page in a gitignored source folder (e.g. `next/src/index.html` + `app.js`). Never commit it.
+- Build the published page: `& .\.claude\skills\dinner-night\scripts\lock.ps1 -Source <src> -Out index.html -Answer "<answer>"`. The `app.js` gets bundled into the encrypted payload, so don't publish `app.js` separately.
+- After locking, test that the unlocked page actually *runs* (for example, the time wheel is filled in), not just that it appears. A bundling bug once delivered app.js as "[object Object]", so the page unlocked but nothing worked.
+- Screenshot the readable source page for layout checks. The render script's simulated clock doesn't wait for the browser's decryption.
+
 ## 5. Hand off
 
 Tell the user what changed, what you assumed, and anything they still need to fill in (such as a link they haven't sent). Then give them the commands to publish:
 
 ```
-git add index.html app.js preview.png
+git add index.html app.js preview.png archive/
 git commit -m "Dinner night: <date>"
 git push
 ```

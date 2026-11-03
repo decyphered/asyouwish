@@ -1,0 +1,96 @@
+<style>
+/* Password gate: only "Cat!", the night art and one inside-joke quote are public. The real page is AES-encrypted below. */
+.gate{gap:28px}
+.gate-card{display:flex;flex-direction:column;gap:14px;padding:22px 18px;background:var(--surface);border-radius:14px}
+.gate-kicker{margin:0;font-family:var(--display);font-weight:800;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;color:var(--chili)}
+.gate-quote{margin:0;font-family:var(--display);font-weight:700;font-size:1.45rem;line-height:1.3;text-wrap:balance}
+.gate-quote .blank{color:var(--accent);border-bottom:2px dashed var(--accent);padding:0 2px;white-space:nowrap}
+.gate-sub{margin:0;color:var(--muted);font-size:.9rem}
+.gate input{width:100%;min-height:52px;font:inherit;font-size:1.05rem;color:var(--fg);background:var(--bg);
+  border:1.5px solid var(--line);border-radius:12px;padding:0 14px}
+.gate input:focus-visible{outline:3px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+.gate .status{text-align:left}
+@media (prefers-reduced-motion: no-preference){
+  .gate-card.shake{animation:shake .4s}
+  @keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+}
+</style>
+
+<div class="wrap gate" id="gate">
+  <header>
+    {{NIGHT_SVG}}
+    <h1>Cat!</h1>
+  </header>
+  <form class="gate-card" id="gateForm" novalidate>
+    <p class="gate-kicker">Password, please</p>
+    <p class="gate-quote">&ldquo;That's a <span class="blank" id="gateBlank">________</span> candle.&rdquo;</p>
+    <p class="gate-sub">Finish the quote. You know the one.</p>
+    <input id="gateInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Type the missing words" aria-label="Missing words">
+    <button type="submit" id="gateBtn">Let me in</button>
+    <p class="status" id="gateMsg" role="status" aria-live="polite"></p>
+  </form>
+</div>
+
+<script type="application/json" id="vault">{{VAULT}}</script>
+<script>
+(() => {
+  const KEY = 'dinner-unlock';
+  const vault = JSON.parse(document.getElementById('vault').textContent);
+  const form = document.getElementById('gateForm'), input = document.getElementById('gateInput');
+  const blank = document.getElementById('gateBlank'), msg = document.getElementById('gateMsg'), btn = document.getElementById('gateBtn');
+  const NOPES = ['Nope. That candle would never.', 'Wrong. Dr. Orna would like a word.', 'Hint: you said it. About a candle. It was rude.'];
+  let misses = 0;
+
+  // Forgiving: case, spaces, hyphens and typing the whole quote don't matter.
+  const norm = s => s.toLowerCase().replace(/[^a-z]/g, '').replace(/^thatsa/, '').replace(/candle$/, '');
+  const bytes = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+
+  async function unlock(word){
+    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(word), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey({name: 'PBKDF2', salt: bytes(vault.salt), iterations: vault.iter, hash: 'SHA-256'},
+      base, {name: 'AES-CBC', length: 256}, false, ['decrypt']);
+    const plain = await crypto.subtle.decrypt({name: 'AES-CBC', iv: bytes(vault.iv)}, key, bytes(vault.data));
+    return JSON.parse(new TextDecoder().decode(plain));
+  }
+
+  function reveal(page){
+    document.getElementById('gate').remove();
+    document.body.insertAdjacentHTML('afterbegin', page.html);
+    const s = document.createElement('script'); s.textContent = page.js; document.body.appendChild(s);
+    window.scrollTo(0, 0);
+  }
+
+  input.addEventListener('input', () => {
+    blank.textContent = input.value.trim().replace(/^that'?s\s+a\s+/i, '').replace(/\s*candle\.?$/i, '') || '________';
+msg.textContent = ''; msg.classList.remove('err'); });
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const word = norm(input.value);
+    if (!word) return;
+    btn.disabled = true; msg.textContent = 'Checking...';
+    try {
+      const page = await unlock(word);
+      try { localStorage.setItem(KEY, word); } catch (err) {}
+      reveal(page);
+    } catch (err) {
+      btn.disabled = false;
+      msg.textContent = NOPES[Math.min(misses++, NOPES.length - 1)]; msg.classList.add('err');
+      form.classList.remove('shake'); void form.offsetWidth; form.classList.add('shake');
+      input.select();
+    }
+  });
+
+  // Unlocked once on this phone? Skip the gate, and keep it hidden while that decrypts so it doesn't flash.
+  let saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (err) {}
+  if (saved) {
+    const gate = document.getElementById('gate');
+    gate.style.visibility = 'hidden';
+    unlock(saved).then(reveal).catch(() => {
+      gate.style.visibility = '';
+      try { localStorage.removeItem(KEY); } catch (err) {}
+    });
+  }
+})();
+</script>
