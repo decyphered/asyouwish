@@ -5,11 +5,13 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:dinner-2026-11-07@dinnerwithcat.com
-DTSTAMP:20261103T070619Z
+DTSTAMP:20261103T072607Z
 DTSTART:20261107T220000Z
-DTEND:20261108T010000Z
+DTEND:20261108T020000Z
 SUMMARY:Dinner and show w/ C!!
-DESCRIPTION:Your picks are saved at https://dinnerwithcat.com/
+LOCATION:Yo house!
+DESCRIPTION:Your picks are saved at https://dinnerwithcat.com/\nChange
+  yo mind? You can update it on the website\, if you'd like!
 URL:https://dinnerwithcat.com/
 BEGIN:VALARM
 ACTION:DISPLAY

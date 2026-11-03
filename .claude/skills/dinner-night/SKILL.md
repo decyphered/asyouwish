@@ -55,7 +55,7 @@ Copy `template/index.html` and `template/app.js` over the repo root files, then 
 
 **app.js**
 - `STORAGE_KEY`: **change it for every night**, e.g. `'dinner-2026-11-15'`. Her phone remembers the last saved pick under this key, and with the old key last night's pick would show up as already "Locked in".
-- `EVENT_DATE`: **change it every night.** The "Add to my calendar" button links to `/calendar/<EVENT_DATE>/HHMM.ics` for her start time. Generate those files with `& .\.claude\skills\dinner-night\scripts\calendar.ps1 -Date <YYYY-MM-DD> -UtcOffset <offset>`. The offset is Alaska's on that date: `-09:00` in winter, `-08:00` during daylight time (roughly March to early November). The title the user chose is "Dinner and show w/ C!!", with 3 hours and a 1-hour reminder. Commit the `calendar/` folder.
+- `EVENT_DATE`: **change it every night.** The "Add to my calendar" button links to `/calendar/<EVENT_DATE>/HHMM.ics` for her start time. Generate those files with `& .\.claude\skills\dinner-night\scripts\calendar.ps1 -Date <YYYY-MM-DD> -UtcOffset <offset>`. The offset is Alaska's on that date: `-09:00` in winter, `-08:00` during daylight time (roughly March to early November). The title the user chose is "Dinner and show w/ C!!", with location "Yo house!", 4 hours, a 1-hour reminder, and notes saying she can update her pick on the site. Commit the `calendar/` folder.
   - The files have to be real hosted `.ics` files. iOS Safari ignored a calendar file the page built itself (the button did nothing). They're public, so keep her picks out of them.
 - `NAMES`: radio value → display name for each dinner.
 - `KNOWN_SPOTS`: must list every takeout spot value exactly. Otherwise a saved spot comes back as "Somewhere else".
