@@ -10,6 +10,7 @@
   border:1.5px solid var(--line);border-radius:12px;padding:0 14px}
 .gate input:focus-visible{outline:3px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
 .gate .status{text-align:left}
+.gate .scene{margin-top:0}
 @media (prefers-reduced-motion: no-preference){
   .gate-card.shake{animation:shake .4s}
   @keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
@@ -18,13 +19,13 @@
 
 <div class="wrap gate" id="gate">
   <header>
-    {{NIGHT_SVG}}
     <h1>Cat!</h1>
+    {{NIGHT_SVG}}
   </header>
   <form class="gate-card" id="gateForm" novalidate>
     <p class="gate-kicker">Password, please</p>
-    <p class="gate-quote">&ldquo;That's a <span class="blank" id="gateBlank">________</span> candle.&rdquo;</p>
-    <p class="gate-sub">Finish the quote. You know the one.</p>
+    <p class="gate-quote">&ldquo;Let's <span class="blank" id="gateBlank">______ ______</span>.&rdquo;</p>
+    <p class="gate-sub">A gas way to spend time, <em>and</em> a new furnishing store.</p>
     <input id="gateInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Type the missing words" aria-label="Missing words">
     <button type="submit" id="gateBtn">Let me in</button>
     <p class="status" id="gateMsg" role="status" aria-live="polite"></p>
@@ -38,11 +39,11 @@
   const vault = JSON.parse(document.getElementById('vault').textContent);
   const form = document.getElementById('gateForm'), input = document.getElementById('gateInput');
   const blank = document.getElementById('gateBlank'), msg = document.getElementById('gateMsg'), btn = document.getElementById('gateBtn');
-  const NOPES = ['Nope. That candle would never.', 'Wrong. Dr. Orna would like a word.', 'Hint: you said it. About a candle. It was rude.'];
+  const NOPES = ['Nope. Cinnamon is disappointed.', 'Wrong. Dr. Orna would like a word.', 'Hint: a gas way to spend time, and a new furnishing store.'];
   let misses = 0;
 
   // Forgiving: case, spaces, hyphens and typing the whole quote don't matter.
-  const norm = s => s.toLowerCase().replace(/[^a-z]/g, '').replace(/^thatsa/, '').replace(/candle$/, '');
+  const norm = s => s.toLowerCase().replace(/[^a-z]/g, '').replace(/^lets/, '');
   const bytes = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
 
   async function unlock(word){
@@ -61,7 +62,7 @@
   }
 
   input.addEventListener('input', () => {
-    blank.textContent = input.value.trim().replace(/^that'?s\s+a\s+/i, '').replace(/\s*candle\.?$/i, '') || '________';
+    blank.textContent = input.value.trim().replace(/^let'?s\s+/i, '').replace(/[.!]+$/, '') || '______ ______';
 msg.textContent = ''; msg.classList.remove('err'); });
 
   form.addEventListener('submit', async e => {

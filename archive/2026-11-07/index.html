@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="archive-title" content="Cozy chat hang">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Cat! Saturday, Nov 7 plans</title>
+<meta name="description" content="Dinner + a show. Bonus features included.">
+<meta property="og:title" content="Cat! Saturday night plans">
+<meta property="og:description" content="Dinner + a show. Bonus features included.">
+<meta property="og:image" content="https://dinnerwithcat.com/archive/2026-11-07/preview.png?v=10">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://dinnerwithcat.com/archive/2026-11-07/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1C1410">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<style>
+/* Layout: one narrow column, a ticket-like menu. Header, the set "main event", dinner choices as big tap cards, sticky save bar. */
+/* Single dark look on purpose: a cozy November night. Burnt orange for choices, harvest gold for small accents. */
+:root{
+  --bg:#1C1410; --surface:#2A1E17; --fg:#F5ECE1; --muted:#C4B3A2; --line:#45342A;
+  --accent:#E8793A; --accent-ink:#1E0E05; --accent-soft:#3D2418; --chili:#E9B949; --chili-soft:#3A2E14; --moon:#F2C67A;
+  --rust:#C2452D;
+  --leaf:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cmask id='v'%3E%3Crect width='24' height='24' fill='%23fff'/%3E%3Cpath d='M7.5 16.5C10.5 12.5 14 9.5 18 6.5' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round'/%3E%3C/mask%3E%3Cpath mask='url(%23v)' d='M20.5 3.5C11 3 4.5 7.5 5 15.5c.1 1.2.4 2.3.9 3.2C12 19 21 15 20.5 3.5Z'/%3E%3Cpath d='M3 21.5c1-2 2.2-3.6 3.6-5.2' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E"); --danger:#FF8A7A; --line-hover:#6A5040;
+  --spooky:"Shrikhand", "Cooper Black", Georgia, serif;
+  --display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --body:"DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;padding-top:env(safe-area-inset-top,0px)}
+body{margin:0}
+img{max-width:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:28px 0}
+.wrap{max-width:30rem;margin:0 auto;display:flex;flex-direction:column;gap:40px;padding-bottom:150px}
+
+header{display:flex;flex-direction:column;gap:6px;position:relative;padding-top:8px}
+.night{position:absolute;top:-8px;right:0;width:112px;height:84px;pointer-events:none;overflow:visible}
+.night .moon{fill:var(--moon)}
+.night .leaf{fill:var(--accent)}
+.night .leaf2{fill:var(--chili)}
+.night .leaf3{fill:var(--rust)}
+@media (prefers-reduced-motion: no-preference){
+  .night .leaf{animation:drift 5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+  .night .leaf2{animation-duration:6s;animation-delay:-2.2s}
+  .night .leaf3{animation-duration:5.5s;animation-delay:-3.4s}
+  @keyframes drift{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(2px,4px) rotate(30deg)}}
+}
+h1{margin:0;font-family:var(--spooky);font-weight:400;font-size:3.6rem;line-height:1.05;letter-spacing:.01em;color:var(--accent)}
+.date-line{margin:2px 0 8px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.date-line time{font-family:var(--display);font-size:1.15rem;font-weight:700;color:var(--fg);white-space:nowrap}
+.date-line .tag{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--chili);
+  border:1.5px solid currentColor;border-radius:999px;padding:2px 9px;white-space:nowrap}
+.hi-sub{margin:0;font-family:var(--display);font-weight:700;font-size:1.3rem;line-height:1.2;letter-spacing:-.01em;text-wrap:balance;max-width:22ch}
+.or{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+/* "Pick for me!" cards lead each list in aurora green so letting me choose reads as a real option, not a fallback. */
+.choice.chef label{border-style:dashed;border-color:var(--chili)}
+.choice.chef .name{color:var(--chili)}
+.choice.chef .chef-hat{flex:none;color:var(--chili)}
+.choice.chef input:checked + label{border-style:solid;border-color:var(--chili);background:var(--chili-soft)}
+.choice.chef input:checked + label .dot{border-color:var(--chili)}
+.choice.chef .dot::after{background:var(--chili)}
+.choice.chef input:focus-visible + label{outline-color:var(--chili)}
+.lede{margin:6px 0 0;color:var(--muted);max-width:34ch}
+
+/* Section headings read like a printed menu: a small leaf, a caps label, and a rule running to the right. */
+h2, .note label{display:flex;align-items:center;gap:10px;margin:0;font-family:var(--display);font-weight:800;font-size:1rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--fg)}
+h2::before, .note label::before{content:"";flex:none;width:16px;height:16px;background:var(--accent);
+  -webkit-mask:var(--leaf) center/contain no-repeat;mask:var(--leaf) center/contain no-repeat}
+/* The three things she picks get a numbered badge instead of the leaf. */
+h2[data-step]::before{content:attr(data-step);width:22px;height:22px;border-radius:50%;-webkit-mask:none;mask:none;
+  display:grid;place-items:center;color:var(--accent-ink);font-size:.75rem;font-weight:800;letter-spacing:0}
+h2::after{content:"";flex:1;height:1.5px;background:var(--line)}
+.section{display:flex;flex-direction:column;gap:12px}
+.section-head{display:flex;align-items:center;gap:12px}
+.section-head::after{content:"";flex:1;height:1px;background:var(--line);order:1}
+.section-head .hint{order:2}
+.hint{font-size:.85rem;color:var(--muted)}
+
+/* The plan is info, not a choice: one solid card, no border, so dashed gold only ever means "let me pick". */
+.plan{background:var(--surface);border-radius:14px}
+.event{display:flex;align-items:center;gap:14px;padding:16px 18px}
+.event + .event{border-top:1px solid var(--line)}
+.event svg{flex:none;color:var(--chili)}
+.event em{display:block;font-style:normal;font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--chili);margin-bottom:2px}
+.event strong{font-family:var(--display);font-size:1.25rem;font-weight:700;display:block;line-height:1.2}
+.event span{font-size:.85rem;color:var(--muted)}
+
+.choices{display:flex;flex-direction:column;gap:10px}
+.choice{position:relative}
+.choice input{position:absolute;opacity:0;inset:0;margin:0;pointer-events:none}
+.choice label{display:flex;align-items:center;gap:14px;min-height:64px;padding:14px 16px;background:var(--surface);
+  border:1.5px solid var(--line);border-radius:14px;cursor:pointer;transition:border-color .15s, background .15s, transform .1s}
+@media (hover:hover){.choice input:not(:checked) + label:hover{border-color:var(--line-hover)}}
+.choice label:active{transform:scale(.99)}
+.choice .dot{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;transition:border-color .15s}
+.choice .dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent);transform:scale(0);transition:transform .15s}
+.choice .name{font-family:var(--display);font-weight:700;font-size:1.2rem;line-height:1.2}
+.choice input:checked + label{border-color:var(--accent);background:var(--accent-soft)}
+.choice input:checked + label .dot{border-color:var(--accent)}
+.choice input:checked + label .dot::after{transform:scale(1)}
+.choice input:focus-visible + label{outline:3px solid var(--accent);outline-offset:2px}
+.choice .txt{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.choice .sub{font-size:.85rem;color:var(--muted)}
+.choice .recipe{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.choice .recipe:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+.choice .more{flex:none;display:inline-flex;align-items:center;gap:4px;font-size:.8rem;font-weight:600;color:var(--muted);
+  padding:4px 10px;border:1.5px solid var(--line);border-radius:999px;transition:color .15s, border-color .15s}
+#d-takeout:checked + label .more, #d-breakfast:checked + label .more{color:var(--accent);border-color:var(--accent)}
+.choice .more svg{transition:transform .2s}
+#d-takeout:checked + label, #d-breakfast:checked + label{border-bottom-left-radius:0;border-bottom-right-radius:0}
+#d-takeout:checked + label .more svg, #d-breakfast:checked + label .more svg{transform:rotate(180deg)}
+#d-takeout:checked + label .more-word::after{content:"Pick a spot"}
+#d-takeout:not(:checked) + label .more-word::after{content:"12 options"}
+#d-breakfast:checked + label .more-word::after{content:"Pick one"}
+#d-breakfast:not(:checked) + label .more-word::after{content:"+ protein"}
+
+.spots{display:flex;flex-wrap:wrap;gap:8px;margin-top:-12px!important;padding:14px 14px 16px!important;
+  background:var(--accent-soft);border:1.5px solid var(--accent)!important;border-top:0!important;border-radius:0 0 14px 14px}
+.choices > .spots{margin-top:-10px!important}
+.spots-label{width:100%;margin:0 0 2px;font-size:.85rem;color:var(--muted)}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+.spot{position:relative}
+.spot input{position:absolute;opacity:0;inset:0;margin:0;pointer-events:none}
+.spot label{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);
+  background:transparent;font-weight:600;cursor:pointer}
+.spot input:checked + label{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.spot input:focus-visible + label{outline:3px solid var(--accent);outline-offset:2px}
+
+.start{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.times{display:flex;flex-wrap:wrap;gap:8px}
+/* Time wheel: a snap-scrolling column; the centred row is the pick. 5 rows of 44px. */
+.wheel-wrap{flex-basis:100%;position:relative;height:220px;background:var(--surface);border-radius:16px;overflow:hidden;transition:opacity .2s}
+.wheel-wrap::before{content:"";position:absolute;left:10px;right:10px;top:88px;height:44px;border-radius:12px;pointer-events:none;
+  background:var(--bg);box-shadow:inset 0 0 0 1.5px var(--line);transition:background .2s, box-shadow .2s}
+.wheel-wrap.picked::before{background:var(--accent-soft);box-shadow:inset 0 0 0 1.5px var(--accent)}
+.wheel-wrap:has(.wheel:focus-visible){outline:3px solid var(--accent);outline-offset:2px}
+.wheel{position:relative;height:100%;overflow-y:auto;scroll-snap-type:y mandatory;overscroll-behavior:contain;scrollbar-width:none;outline:0;
+  -webkit-mask-image:linear-gradient(transparent, #000 30%, #000 70%, transparent);mask-image:linear-gradient(transparent, #000 30%, #000 70%, transparent)}
+.wheel::-webkit-scrollbar{display:none}
+.wheel .pad{height:88px}
+.wheel .opt{position:relative;height:44px;display:flex;align-items:center;justify-content:center;gap:5px;scroll-snap-align:center;
+  font-family:var(--display);font-weight:700;font-size:1.25rem;color:var(--muted);cursor:pointer;user-select:none;-webkit-user-select:none;
+  -webkit-tap-highlight-color:transparent}
+.wheel .opt.on{color:var(--fg)}
+.wheel-wrap.picked .opt.on{color:var(--accent)}
+.wheel .ampm{font-size:.7em;opacity:.75}
+.wheel .pod{position:absolute;right:24px;font-family:var(--body);font-weight:500;font-size:.75rem;color:var(--muted);display:none}
+.wheel .opt.on .pod{display:block}
+.wheel-hint{margin:0;flex-basis:100%;text-align:center;font-size:.85rem;color:var(--muted)}
+.wheel-hint b{color:var(--fg)}
+.dessert{margin-top:28px;display:flex;flex-direction:column;gap:12px}
+.note{margin-top:28px;display:flex;flex-direction:column;gap:12px}
+.other{flex-basis:100%}
+.other label{font-size:.85rem;color:var(--muted);display:block;margin-bottom:6px}
+.other input{min-height:48px}
+textarea, .other input{width:100%;min-height:72px;resize:vertical;font:inherit;color:var(--fg);background:var(--surface);
+  border:1.5px solid var(--line);border-radius:12px;padding:12px 14px}
+::placeholder{color:var(--muted);opacity:.6}
+textarea:focus-visible, .other input:focus-visible{outline:3px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+
+.saved{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:14px;background:var(--accent-soft)}
+.saved svg{flex:none;color:var(--accent);margin-top:2px}
+.saved p{margin:0}
+.saved .when{font-size:.85rem;color:var(--muted)}
+.cal-btn{display:inline-flex;align-items:center;min-height:44px;margin-top:12px;padding:0 18px;border-radius:999px;
+  background:var(--accent);color:var(--accent-ink);font-weight:600;text-decoration:none;cursor:pointer}
+.cal-btn[hidden], .cal-hint[hidden]{display:none}
+.cal-btn:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
+.cal-hint{margin-top:6px!important}
+
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--bg);
+  padding-top:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom, 0px));
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.bar::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:24px;background:linear-gradient(transparent,var(--bg));pointer-events:none}
+.bar-inner{max-width:30rem;margin:0 auto;display:flex;flex-direction:column;gap:6px}
+button{font:inherit;font-weight:600;font-size:1.05rem;min-height:52px;border-radius:14px;border:0;cursor:pointer;
+  background:var(--accent);color:var(--accent-ink)}
+button:disabled{background:var(--surface);color:var(--muted);box-shadow:inset 0 0 0 1.5px var(--line);cursor:not-allowed}
+button.is-saved{background:transparent;color:var(--chili);box-shadow:inset 0 0 0 1.5px var(--chili);cursor:default}
+button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
+.status{font-size:.85rem;color:var(--muted);text-align:center;min-height:1.3em;margin:0}
+.status.err{color:var(--danger)}
+.status.ok{color:var(--chili);font-weight:600;font-size:.95rem}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <svg class="night" viewBox="0 0 112 84" aria-hidden="true">
+      <defs><radialGradient id="moonGlow"><stop offset=".5" stop-color="#F2C67A" stop-opacity=".26"/><stop offset="1" stop-color="#F2C67A" stop-opacity="0"/></radialGradient></defs>
+      <circle cx="80" cy="34" r="52" fill="url(#moonGlow)"></circle>
+      <circle class="moon" cx="80" cy="34" r="26"></circle>
+      <g transform="translate(24 28) rotate(40)"><path class="leaf" d="M0-8c6 3 6 12 0 16-6-4-6-13 0-16zM-.6 8h1.2v3h-1.2z"></path></g>
+      <g transform="translate(50 62) rotate(-25)"><path class="leaf leaf2" d="M0-6c4.5 2.5 4.5 9 0 12-4.5-3-4.5-9.5 0-12zM-.5 6h1v2.5h-1z"></path></g>
+      <g transform="translate(18 64) rotate(-60)"><path class="leaf leaf3" d="M0-5c4 2 4 7.5 0 10-4-2.5-4-8 0-10z"></path></g>
+    </svg>
+    <h1>Cat!</h1>
+    <p class="date-line"><time datetime="2026-11-07">Saturday, November 7</time><span class="tag">Cozy chat hang</span></p>
+    <p class="hi-sub">Dinner w/ Dr. Orna, discussion, and relaxing!</p>
+    <p class="lede">Sunset 4:41pm. Dinner: before sunrise, promise.</p>
+  </header>
+
+  <div id="savedBox" class="saved" hidden>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+    <div><p id="savedText"></p><p class="when" id="savedWhen"></p>
+      <a class="cal-btn" id="calBtn" hidden>📅 Add to my calendar</a>
+      <p class="when cal-hint" id="calHint" hidden>Delete the old event so you don't end up with two.</p></div>
+  </div>
+
+  <section class="section" aria-labelledby="pl">
+    <h2 id="pl">The plan</h2>
+    <div class="plan">
+      <div class="event">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="13" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
+        <div><em>Main event</em><strong>Couples Therapy</strong><span>Dr. Orna's on. Commentary strongly encouraged.</span></div>
+      </div>
+      <div class="event">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg>
+        <div><em>Bonus feature</em><strong>Intentional Talk Time</strong><span>Set-aside time to talk through a few topics together.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <form id="pickForm" class="section" novalidate>
+    <div class="start">
+      <h2 id="st" data-step="1">Start time</h2>
+      <div class="times" role="group" aria-labelledby="st">
+        <div class="wheel-wrap" id="wheelWrap"><div class="wheel" id="wheel" role="listbox" tabindex="0" aria-label="Start time"></div></div>
+        <p class="wheel-hint" id="wheelHint" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <h2 id="dn" data-step="2">Dinner</h2>
+    <div class="choices" role="radiogroup" aria-labelledby="dn">
+      <div class="choice chef">
+        <input type="radio" name="dinner" id="d-drive" value="chefs-choice">
+        <label for="d-drive"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Pick for me!</span><span class="sub">You choose, chef. Surprise me.</span></span><svg class="chef-hat" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 13.9V20h12v-6.1A4 4 0 0 0 17 6a5 5 0 0 0-10 0 4 4 0 0 0-1 7.9Z"/><path d="M6 16.5h12"/></svg></label>
+      </div>
+      <div class="or" aria-hidden="true">or choose</div>
+      <div class="choice">
+        <input type="radio" name="dinner" id="d-scallion" value="scallion-oil-noodles">
+        <label for="d-scallion"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Scallion Oil Noodles</span><span class="sub">Taiwanese, simple and savory. <a class="recipe" href="https://tiffycooks.com/taiwanese-scallion-oil-noodles-easy-vegetarian/" target="_blank" rel="noopener">Recipe &#8599;</a></span></span></label>
+      </div>
+      <div class="choice">
+        <input type="radio" name="dinner" id="d-thai" value="thai-crispy-chicken">
+        <label for="d-thai"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Thai Crispy Chicken</span><span class="sub">With ginger scallion rice. <a class="recipe" href="https://tiffycooks.com/one-pot-thai-crispy-chicken-with-ginger-scallion-rice/" target="_blank" rel="noopener">Recipe &#8599;</a></span></span></label>
+      </div>
+      <div class="choice">
+        <input type="radio" name="dinner" id="d-udon" value="spicy-creamy-udon">
+        <label for="d-udon"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Spicy Creamy Udon</span><span class="sub">With crispy mushrooms. <a class="recipe" href="https://tiffycooks.com/one-pot-spicy-creamy-udon-with-crispy-mushrooms/" target="_blank" rel="noopener">Recipe &#8599;</a></span></span></label>
+      </div>
+      <div class="choice">
+        <input type="radio" name="dinner" id="d-breakfast" value="breakfast">
+        <label for="d-breakfast" aria-controls="proteinBox"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Breakfast for dinner</span><span class="sub">More likely than you think.</span></span><span class="more" aria-hidden="true"><span class="more-word"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></label>
+      </div>
+      <div id="proteinBox" class="spots" role="radiogroup" aria-labelledby="proteinLbl" hidden>
+        <p class="spots-label" id="proteinLbl">Scrambled eggs, toast and potatoes. Which protein?</p>
+        <div class="spot"><input type="radio" name="protein" id="p-bacon" value="Bacon"><label for="p-bacon">Bacon</label></div>
+        <div class="spot"><input type="radio" name="protein" id="p-sausage" value="Sausage"><label for="p-sausage">Sausage</label></div>
+        <div class="spot"><input type="radio" name="protein" id="p-ham" value="Ham"><label for="p-ham">Ham</label></div>
+        <div class="spot"><input type="radio" name="protein" id="p-spam" value="Spam"><label for="p-spam">Spam</label></div>
+        <div class="spot"><input type="radio" name="protein" id="p-any" value="You pick"><label for="p-any">You pick!</label></div>
+        <div class="spot"><input type="radio" name="protein" id="p-other" value="other"><label for="p-other">Something else</label></div>
+        <div class="other" id="otherProteinWrap" hidden>
+          <label for="otherProtein">What sounds good?</label>
+          <input type="text" id="otherProtein" maxlength="60" autocomplete="off" placeholder="Type a protein">
+        </div>
+      </div>
+      <div class="choice">
+        <input type="radio" name="dinner" id="d-takeout" value="takeout">
+        <label for="d-takeout" aria-controls="spotBox"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Takeout</span><span class="sub">Yak and Yeti, So Thai, and more</span></span><span class="more" aria-hidden="true"><span class="more-word"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></label>
+      </div>
+    </div>
+
+    <div id="spotBox" class="spots" role="radiogroup" aria-labelledby="spotLbl" hidden>
+      <p class="spots-label" id="spotLbl">From where?</p>
+      <div class="spot"><input type="radio" name="spot" id="s-yak" value="Yak and Yeti"><label for="s-yak">Yak and Yeti</label></div>
+      <div class="spot"><input type="radio" name="spot" id="s-jeepneys" value="Jeepney's"><label for="s-jeepneys">Jeepney's</label></div>
+      <div class="spot"><input type="radio" name="spot" id="s-beartooth" value="Beartooth"><label for="s-beartooth">Beartooth</label></div>
+      <div class="spot"><input type="radio" name="spot" id="s-eljefe" value="El Jefe"><label for="s-eljefe">El Jefe</label></div>
+      <div class="spot"><input type="radio" name="spot" id="s-roadhouse" value="Spenard Roadhouse"><label for="s-roadhouse">Spenard Roadhouse</label></div>
+      <div class="spot"><input type="radio" name="spot" id="s-sothai" value="So Thai"><label for="s-sothai">So Thai</label></div>
+      <div class="spot"><input type="radio" name="spot" id="s-bombay" value="Bombay"><label for="s-bombay">Bombay</label></div>
+      <div class="spot"><input type="radio" name="spot" id="s-shawarma" value="My Shawarma"><label for="s-shawarma">My Shawarma</label></div>
+      <div class="spot"><input type="radio" name="spot" id="s-sheba" value="Queen of Sheba"><label for="s-sheba">Queen of Sheba</label></div>
+      <div class="spot"><input type="radio" name="spot" id="s-meraki" value="Meraki Grill"><label for="s-meraki">Meraki Grill</label></div>
+      <div class="spot"><input type="radio" name="spot" id="s-crimson" value="Crimson"><label for="s-crimson">Crimson</label></div>
+      <div class="spot"><input type="radio" name="spot" id="s-other" value="other"><label for="s-other">Somewhere else</label></div>
+      <div class="other" id="otherWrap" hidden>
+        <label for="otherSpot">Where?</label>
+        <input type="text" id="otherSpot" maxlength="60" autocomplete="off" placeholder="Type a place">
+      </div>
+    </div>
+
+    <div class="dessert">
+      <h2 id="ds" data-step="3">Dessert</h2>
+      <div class="choices" role="radiogroup" aria-labelledby="ds">
+        <div class="choice chef">
+          <input type="radio" name="dessert" id="x-surprise" value="surprise">
+          <label for="x-surprise"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Surprise me!</span><span class="sub">Chef's choice. Includes secret options.</span></span><svg class="chef-hat" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C9.5 3 12 8 12 8s2.5-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg></label>
+        </div>
+        <div class="or" aria-hidden="true">or choose</div>
+        <div class="choice">
+          <input type="radio" name="dessert" id="x-brownies" value="brownies">
+          <label for="x-brownies"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Brownies + Ice Cream</span><span class="sub">The remake. Better this time, lol.</span></span></label>
+        </div>
+        <div class="choice">
+          <input type="radio" name="dessert" id="x-sandwich" value="cookie-sandwich">
+          <label for="x-sandwich"><span class="dot" aria-hidden="true"></span><span class="txt"><span class="name">Cookie Ice Cream Sandwich </span><span class="sub">Alaskan Classic from Wild Scoops!</span></span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <div class="section-head"><label for="note">Anything else?</label><span class="hint">Optional</span></div>
+      <textarea id="note" maxlength="300" placeholder="Requests, demands, etc."></textarea>
+    </div>
+  </form>
+</div>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button type="submit" form="pickForm" id="saveBtn" disabled>Save my pick</button>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+  </div>
+</div>
+
+<script src="app.js?v=15"></script>
+</body>
+</html>

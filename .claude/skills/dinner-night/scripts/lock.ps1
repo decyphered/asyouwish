@@ -23,9 +23,11 @@ $m = [regex]::Match($page, '(?s)^(.*<body[^>]*>)(.*)(</body>.*)$')
 if (-not $m.Success) { throw "No <body> in source page." }
 $body = $m.Groups[2].Value -replace '<script src="app\.js[^"]*"></script>', ''
 $svg = [regex]::Match($body, '(?s)<svg class="night".*?</svg>').Value
+# No corner art? Show the header scene (the house) on the gate instead.
+if (-not $svg) { $svg = [regex]::Match($body, '(?s)<div class="scene">.*?</p>\s*</div>').Value }
 
 # Same normalisation the gate uses on what she types.
-$word = ($Answer.ToLower() -replace '[^a-z]', '') -replace '^thatsa', '' -replace 'candle$', ''
+$word = ($Answer.ToLower() -replace '[^a-z]', '') -replace '^lets', ''
 
 $json = @{ html = $body; js = $js } | ConvertTo-Json -Compress
 $salt = New-Object byte[] 16; $iv = New-Object byte[] 16

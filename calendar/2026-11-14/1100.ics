@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//dinnerwithcat.com//dinner night//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:dinner-2026-11-14@dinnerwithcat.com
+DTSTAMP:20261114T044439Z
+DTSTART:20261114T200000Z
+DTEND:20261115T040000Z
+SUMMARY:Glow-up day w/ C!!
+LOCATION:Yo house!
+DESCRIPTION:Your picks are saved at https://dinnerwithcat.com/\nChange
+  yo mind? You can update it on the website\, if you'd like!
+URL:https://dinnerwithcat.com/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT1H
+DESCRIPTION:Glow-up day w/ C!!
+END:VALARM
+END:VEVENT
+END:VCALENDAR
